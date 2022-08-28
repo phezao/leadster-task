@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: %i[show edit update destroy]
 
   def index
-    @contacts = ContactSearcher.call(params[:fullname])
+    @pagy, @contacts = pagy(ContactSearcher.call(params[:fullname], current_user))
   end
 
   def show
@@ -13,13 +13,14 @@ class ContactsController < ApplicationController
   end
 
   def edit
+    @contact.build_address if @contact.address.blank?
   end
 
   def create
     @contact = Contact.new(contact_params)
 
     if @contact.save
-      redirect_to contact_path(@example), notice: "Contato criado com sucesso."
+      redirect_to edit_contact_path(@contact), notice: "Contato criado com sucesso."
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,13 +37,13 @@ class ContactsController < ApplicationController
   def destroy
     @contact.destroy
 
-    redirect_to examples_url, notice: "Contato excluído com sucesso."
+    redirect_to contacts_url, notice: "Contato excluído com sucesso."
   end
 
   private
 
   def set_contact
-    @contact = contact.find(params[:id])
+    @contact = Contact.find(params[:id])
   end
 
   def contact_params
@@ -51,7 +52,8 @@ class ContactsController < ApplicationController
       :tax_id,
       :email,
       :birthdate,
-      address_attributes: %i[zipcode city state street street_number neighborhood]
+      :user_id,
+      address_attributes: %i[zipcode city state street street_number neighborhood id]
     )
   end
 end
