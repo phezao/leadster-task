@@ -32,6 +32,8 @@ gem 'pagy'
 gem 'net-smtp', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
+gem 'faker'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -52,9 +54,6 @@ group :development, :test do
   gem 'rspec-rails'
   # Factory Bot Rails
   gem 'factory_bot_rails'
-
-  # Faker
-  gem 'faker'
 end
 
 group :development do
