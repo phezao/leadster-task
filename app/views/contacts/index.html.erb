@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contacts</h1>
+
+<%= form_tag contacts_path, method: :get do %>
+  <%= label_tag "fullname", "Nome" %>
+  <%= text_field_tag :fullname, params[:fullname], class: "form-control", placeholder: "Insira o nome (ou parte) aqui" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome completo</th>
+      <th>Email</th>
+      <th>CPF</th>
+      <th>Data de nascimento</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.fullname %></td>
+        <td><%= contact.email %></td>
+        <td><%= format_tax_id(contact.tax_id) %></td>
+        <td><%= contact.birthdate_br %></td>
+        <td><%= link_to 'Show', contact %></td>
+        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Adicionar contato', new_contact_path, class: 'btn btn-primary' %>
+
+<%== pagy_bootstrap_nav(@pagy) %>

@@ -1,5 +1,6 @@
 class Contact < ApplicationRecord
-  has_one :address
+  belongs_to :user
+  has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
 
   validates :fullname, :birthdate, :email, presence: true

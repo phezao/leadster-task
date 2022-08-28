@@ -1,9 +1,10 @@
 class ContactSearcher < ApplicationService
-  def initialize(params)
+  def initialize(params, current_user)
+    @collection = Contact.where(user: current_user)
     @params = params
   end
 
   def call
-    Contact.where('fullname ILIKE ?', "%#{@params}%")
+    @collection.where('fullname ILIKE ?', "%#{@params}%")
   end
 end

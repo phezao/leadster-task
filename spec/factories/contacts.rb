@@ -4,5 +4,6 @@ FactoryBot.define do
     email { Faker::Internet.email }
     tax_id { Faker::Number.number(digits: 11) }
     birthdate { Faker::Date.birthday(min_age: 18, max_age: 65) }
+    user
   end
 end

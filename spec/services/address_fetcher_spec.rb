@@ -16,7 +16,7 @@ RSpec.describe AddressFetcher do
                           ddd: "11",
                           siafi: "7107" }
 
-      expect(response).to eq(viacep_response.transform_keys(&:to_s))
+      expect(response).to eq(viacep_response)
     end
   end
 

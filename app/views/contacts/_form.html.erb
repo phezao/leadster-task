@@ -1,0 +1,36 @@
+
+<%= simple_form_for(@contact) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :fullname, label: 'Nome completo' %>
+    <%= f.input :email %>
+    <%= f.input :tax_id, label: 'CPF' %>
+    <%= f.input :birthdate, html5: true, label: 'Data de nascimento' %>
+    <%= f.input :user_id, as: :hidden, :input_html => {value: current_user.id}%>
+  </div>
+
+  <% if @contact.id %>
+    <div class="form-inputs">
+      <%= f.simple_fields_for :address do |p| %>
+        <%= p.input :zipcode, label: 'CEP' unless @contact.address.zipcode.blank? %>
+        <% if @contact.address.zipcode.blank? %>
+          <label class="form-label string required" for="contact_address_attributes_zipcode">CEP <abbr title="required">*</abbr></label>
+          <input data-reflex="change->ExampleReflex#test" data-contact="<%= @contact.id %>" class="form-control string required" type="text" name="contact[address_attributes][zipcode]" id="contact_address_attributes_zipcode">
+        <% end %>
+        <%= p.input :street, label: 'Endereço' %>
+        <%= p.input :city, label: 'Cidade' %>
+        <%= p.input :state, label: 'Estado', collection: Address::STATES.values %>
+        <%= p.input :neighborhood, label: 'Bairro' %>
+        <%= p.input :street_number %>
+      <% end %>
+    </div>
+  <% end %>
+
+
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>
