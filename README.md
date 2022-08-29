@@ -21,6 +21,6 @@ password: 123456
 
 There are unit tests for each model and for each service. You can run the tests by running:
 ```bash
-bin/rspec
+rspec
 ```
 The project is hosted on heroku at: https://leaster-task-philip.herokuapp.com/
