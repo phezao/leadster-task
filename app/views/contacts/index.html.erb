@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Contacts</h1>
+<h1>Todos os contatos</h1>
 
 <div class="form-group mb-4">
   <%= form_tag contacts_path, method: :get do %>
@@ -29,9 +29,9 @@
         <td><%= contact.email %></td>
         <td><%= format_tax_id(contact.tax_id) %></td>
         <td><%= contact.birthdate_br %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Detalhes', contact %></td>
+        <td><%= link_to 'Editar', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Deletar', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

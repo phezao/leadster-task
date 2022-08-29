@@ -14,11 +14,8 @@
   <% if @contact.id %>
     <div class="form-inputs">
       <%= f.simple_fields_for :address do |p| %>
-        <%= p.input :zipcode, label: 'CEP' unless @contact.address.zipcode.blank? %>
-        <% if @contact.address.zipcode.blank? %>
-          <label class="form-label string required" for="contact_address_attributes_zipcode">CEP <abbr title="required">*</abbr></label>
-          <input data-reflex="change->ExampleReflex#test" data-contact="<%= @contact.id %>" class="form-control string required" type="text" name="contact[address_attributes][zipcode]" id="contact_address_attributes_zipcode">
-        <% end %>
+        <label class="form-label string required" for="contact_address_attributes_zipcode">CEP <abbr title="required">*</abbr></label>
+        <input value="<%= @contact.address.zipcode %>" data-reflex="change->ExampleReflex#test" data-contact="<%= @contact.id %>" class="form-control string required" type="text" name="contact[address_attributes][zipcode]" id="contact_address_attributes_zipcode">
         <%= p.input :street, label: 'Endereço' %>
         <%= p.input :city, label: 'Cidade' %>
         <%= p.input :state, label: 'Estado', collection: Address::STATES.values %>
