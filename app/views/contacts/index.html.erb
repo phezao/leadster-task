@@ -2,14 +2,17 @@
 
 <h1>Contacts</h1>
 
-<%= form_tag contacts_path, method: :get do %>
-  <%= label_tag "fullname", "Nome" %>
-  <%= text_field_tag :fullname, params[:fullname], class: "form-control", placeholder: "Insira o nome (ou parte) aqui" %>
-<% end %>
+<div class="form-group mb-4">
+  <%= form_tag contacts_path, method: :get do %>
+    <%= label_tag "fullname", "Nome" %>
+    <%= text_field_tag :fullname, params[:fullname], class: "form-control", placeholder: "Insira o nome (ou parte) aqui" %>
+  <% end %>
+</div>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>#</th>
       <th>Nome completo</th>
       <th>Email</th>
       <th>CPF</th>
@@ -19,8 +22,9 @@
   </thead>
 
   <tbody>
-    <% @contacts.each do |contact| %>
+    <% @contacts.each_with_index do |contact, index| %>
       <tr>
+        <td><%= index + 1 %></td>
         <td><%= contact.fullname %></td>
         <td><%= contact.email %></td>
         <td><%= format_tax_id(contact.tax_id) %></td>
@@ -34,7 +38,5 @@
 </table>
 
 <br>
-
-<%= link_to 'Adicionar contato', new_contact_path, class: 'btn btn-primary' %>
 
 <%== pagy_bootstrap_nav(@pagy) %>
