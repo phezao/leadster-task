@@ -12,7 +12,6 @@
 <table class="table">
   <thead>
     <tr>
-      <th>#</th>
       <th>Nome completo</th>
       <th>Email</th>
       <th>CPF</th>
@@ -22,9 +21,8 @@
   </thead>
 
   <tbody>
-    <% @contacts.each_with_index do |contact, index| %>
+    <% @contacts.each do |contact| %>
       <tr>
-        <td><%= index + 1 %></td>
         <td><%= contact.fullname %></td>
         <td><%= contact.email %></td>
         <td><%= format_tax_id(contact.tax_id) %></td>
