@@ -29,6 +29,7 @@ class ExampleReflex < ApplicationReflex
     contact = Contact.find(element.dataset[:contact])
     cep = element[:value].strip.gsub(/[^\d]/, "")
     @response = AddressFetcher.call(cep)
+    return @response if @response[:cep].blank?
     address_attributes = {
       zipcode: @response[:cep],
       street: @response[:logradouro],
