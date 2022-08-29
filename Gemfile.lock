@@ -122,6 +122,7 @@ GEM
       sassc (>= 1.11)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hiredis (0.6.3)
     httparty (0.20.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -224,6 +225,9 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.8.0)
+    redis-session-store (0.11.4)
+      actionpack (>= 3, < 8)
+      redis (>= 3, < 5)
     regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -326,6 +330,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   font-awesome-sass (~> 5.6.1)
+  hiredis
   httparty
   jbuilder (~> 2.7)
   listen (~> 3.3)
@@ -340,7 +345,8 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.6, >= 6.1.6.1)
   rails-i18n (~> 6.0)
-  redis (~> 4.0)
+  redis (>= 4.0)
+  redis-session-store
   rspec-rails
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
